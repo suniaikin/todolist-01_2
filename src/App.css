@@ -1,0 +1,87 @@
+.app {
+    padding: 30px;
+    display: flex;
+    justify-content: left;
+}
+
+.app > div {
+    margin-right: 50px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 20px 0px;
+}
+
+.task {
+    font-weight: normal;
+}
+
+.task.done {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 16px;
+    gap: 20px;
+}
+
+.lists {
+    border: 2px solid white;
+    padding: 16px;
+    border-radius: 15px;
+    width: 250px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+.limits-notification {
+    font-size: 0.7em;
+    color: lightgray;
+    margin-top: 5px;
+    height: 1px;
+}
+
+.buttons_bottom {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.btn {
+    width: 80px;
+    cursor: pointer;
+}
+
+.btn-filter-active {
+    border-radius: 3px;
+    background-color: chocolate;
+    border: 1px solid white;
+    color: white;
+    width: 80px;
+}
+
+.input-error {
+    border: 3px solid rgb(117, 0, 0);
+    background-color: red;
+}
+
+.add-button {
+	cursor: pointer;
+}
