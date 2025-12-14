@@ -1,35 +1,30 @@
+import { Task } from "./Task";
+
 type Props = {
 	title: string
+	tasks: Task[]
 }
 
 export type Task = {
-	id: string
-	title: string;
-	isDone: boolean
-}
+    id: string;
+    title: string;
+    isDone: boolean;
+};
 
-export const TodolistItem = (props: Props) => {
+export const TodolistItem = ({ title, isDone, tasks }: Props) => {
+    const listitems = tasks.map((t) => {
+        return <Task title={t.title} isDone={t.isDone} />;
+    });
     return (
         <div className="lists">
             <div className="list-content">
-                <h3>{props.title}</h3>
+                <h3>{title}</h3>
                 <div className="input-form">
                     <input />
                     <button>+</button>
                 </div>
             </div>
-            <ul>
-                <li>
-                    <input type="checkbox" checked={true} />{" "}
-                    <span>HTML&CSS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={true} /><span>JS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={false} /><span>React</span>
-                </li>
-            </ul>
+            <ul>{listitems}</ul>
 
             <div>
                 <button>All</button>
