@@ -25,9 +25,9 @@ ul {
 
 .App {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: top;
     width: 100%;
     margin: 0 auto;
     max-width: 800px;
@@ -60,6 +60,12 @@ h3 {
     justify-content: space-between;
 }
 
+.input-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
 .limits-notification {
     font-size: 0.7em;
     color: lightgray;
@@ -68,9 +74,10 @@ h3 {
 }
 
 .buttons_bottom {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    font-size: 10px;
 }
 
 .btn {
