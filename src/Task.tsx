@@ -1,28 +1,14 @@
-export type TaskProps = {
-    id: string;
-    title: string;
-    isDone: boolean;
-};
+import { Button } from "./Button";
+import type { TaskComponentProps } from "./types";
 
-export const Task = ({ id, title, isDone }: TaskProps) => {
+
+export const Task = ({ id, title, isDone, deleteTask }: TaskComponentProps) => {
     return (
         <li key={id}>
             <input type="checkbox" checked={isDone} />
             <span>{title}</span>
+            <Button title="x" onClick={() => deleteTask(id)} />
         </li>
     );
 };
 
-// export type TaskProps = {
-//     title: string;
-//     isDone: boolean;
-// };
-
-// export const Task = ({ title, isDone }: TaskProps) => {
-//     return (
-//         <li>
-//             <input type="checkbox" checked={isDone} />{" "}
-//             <span>{title}</span>
-//         </li>
-//     );
-// };

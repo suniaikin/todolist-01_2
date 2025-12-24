@@ -1,68 +1,58 @@
-import type { TaskProps } from "./Task";
+import type { TodolistItemProps } from "./types";
 import { Task } from "./Task";
 import { Button } from "./Button";
+import { useRef } from "react";
 
-type TodolistItemProps = {
-    title: string;
-    tasks: TaskProps[];
-};
-
-export const TodolistItem = ({ title, tasks }: TodolistItemProps) => {
+export const TodolistItem = ({
+    title,
+    tasks,
+    deleteTask,
+    changeFilter,
+    createTask,
+}: TodolistItemProps) => {
     const listItems =
         tasks.length === 0
-            ? "No Tasks Yet"
+            ? "Enter your first task"
             : tasks.map((t) => {
-                  return <Task id={t.id} isDone={t.isDone} title={t.title} />;
+                  return (
+                      <Task
+                          key={t.id}
+                          id={t.id}
+                          isDone={t.isDone}
+                          title={t.title}
+                          deleteTask={deleteTask}
+                          changeFilter={changeFilter}
+                      />
+                  );
               });
 
+    const taskInputRef = useRef<HTMLInputElement>(null);
+
+    const createHandler = () => {
+        if (taskInputRef.current) {
+            createTask(taskInputRef.current.value);
+            taskInputRef.current.value = "";
+        }
+    };
+
     return (
-        <div>
-            <h3>{title}</h3>
-            <div>
-                <input />
-                <Button title="+" />
+        <div className="lists">
+            <div className="list-content">
+                <h3>{title}</h3>
+                <div className="input-form">
+                    <input className="input-form" ref={taskInputRef} />
+                    <Button title="Add" onClick={createHandler} />
+                </div>
+                <ul>{listItems}</ul>
             </div>
-            <ul>{listItems}</ul>
-            <div>
-                <Button title="All" />
-                <Button title="Active" />
-                <Button title="Completed" />
+            <div className="buttons_bottom">
+                <Button title="All" onClick={() => changeFilter("all")} />
+                <Button title="Active" onClick={() => changeFilter("active")} />
+                <Button
+                    title="Completed"
+                    onClick={() => changeFilter("completed")}
+                />
             </div>
         </div>
     );
 };
-
-// import { Task } from "./Task";
-// import type { TaskProps } from "./Task";
-// import { Button } from "./Button";
-
-// type Props = {
-//     title: string;
-//     tasks: TaskProps[];
-// };
-
-// export const TodolistItem = ({ title, tasks }: Props) => {
-//     const listitems = tasks.length === 0
-//             ? "No tasks"
-//             : tasks.map((t) => {
-//                   return <Task title={t.title} isDone={t.isDone} />;
-//               });
-//     return (
-//         <div className="lists">
-//             <div className="list-content">
-//                 <h3>{title}</h3>
-//                 <div className="input-form">
-//                     <input />
-//                     <Button title="+"/>
-//                 </div>
-//                 <ul>{listitems}</ul>
-//             </div>
-
-//             <div className="buttons_bottom ">
-//                 <Button title="All" />
-//                 <Button title="Active" />
-//                 <Button title="Completed" />
-//             </div>
-//         </div>
-//     );
-// };

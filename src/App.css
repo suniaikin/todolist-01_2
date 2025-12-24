@@ -63,7 +63,7 @@ h3 {
 .input-form {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 8px;
+    gap: 5px;
 }
 
 .limits-notification {
