@@ -1,7 +1,7 @@
 import type { TodolistItemProps } from "./types";
 import { Task } from "./Task";
 import { Button } from "./Button";
-import { useRef } from "react";
+import { useState } from "react";
 
 export const TodolistItem = ({
     title,
@@ -10,6 +10,9 @@ export const TodolistItem = ({
     changeFilter,
     createTask,
 }: TodolistItemProps) => {
+    
+	const [taskInput, setTaskInput] = useState("");
+
     const listItems =
         tasks.length === 0
             ? "Enter your first task"
@@ -26,22 +29,13 @@ export const TodolistItem = ({
                   );
               });
 
-    const taskInputRef = useRef<HTMLInputElement>(null);
-
-    const createHandler = () => {
-        if (taskInputRef.current) {
-            createTask(taskInputRef.current.value);
-            taskInputRef.current.value = "";
-        }
-    };
-
     return (
         <div className="lists">
             <div className="list-content">
                 <h3>{title}</h3>
                 <div className="input-form">
-                    <input className="input-form" ref={taskInputRef} />
-                    <Button title="Add" onClick={createHandler} />
+                    <input className="input-form" value={taskInput} />
+                    <Button title="Add" onClick={() => createTask("new")} />
                 </div>
                 <ul>{listItems}</ul>
             </div>

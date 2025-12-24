@@ -23,6 +23,7 @@ export type TaskComponentProps = {
 export type ButtonComponentProps = {
     title: string;
     onClick?: () => void;
+    customClass?: string;
 };
 
 export type FilterType = "all" |  "active" | "completed"

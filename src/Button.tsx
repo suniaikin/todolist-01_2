@@ -1,5 +1,9 @@
 import type { ButtonComponentProps } from "./types";
 
-export const Button = ({ title, onClick }: ButtonComponentProps) => {
-    return <button onClick={onClick}>{title}</button>;
+export const Button = ({ title, onClick, customClass }: ButtonComponentProps) => {
+    return (
+        <button onClick={onClick} className={customClass}>
+            {title}
+        </button>
+    );
 };
