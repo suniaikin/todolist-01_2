@@ -3,6 +3,9 @@ import { Task } from "./Task";
 import { Button } from "./Button";
 import { useState } from "react";
 
+const MAX_SYMBOLS = 10;
+const forbiddenWords = ["shit", "fuck"];
+
 export const TodolistItem = ({
     title,
     tasks,
@@ -10,34 +13,83 @@ export const TodolistItem = ({
     changeFilter,
     createTask,
 }: TodolistItemProps) => {
-    
-	const [taskInput, setTaskInput] = useState("");
+    const [taskInput, setTaskInput] = useState("");
 
-    const listItems =
-        tasks.length === 0
-            ? "Enter your first task"
-            : tasks.map((t) => {
-                  return (
-                      <Task
-                          key={t.id}
-                          id={t.id}
-                          isDone={t.isDone}
-                          title={t.title}
-                          deleteTask={deleteTask}
-                          changeFilter={changeFilter}
-                      />
-                  );
-              });
+    let hasForbiddenWord = forbiddenWords.some((word) =>
+        taskInput.toLowerCase().includes(word)
+    );
+
+    const handleAddClick = () => {
+        createTask(taskInput);
+        setTaskInput("");
+    };
 
     return (
         <div className="lists">
             <div className="list-content">
                 <h3>{title}</h3>
                 <div className="input-form">
-                    <input className="input-form" value={taskInput} />
-                    <Button title="Add" onClick={() => createTask("new")} />
+                    <input
+                        value={taskInput}
+                        className="input-form"
+                        onChange={(e) => setTaskInput(e.currentTarget.value)}
+                        onKeyDown={(e) =>
+                            e.key === "Enter" ? handleAddClick() : ""
+                        }
+                    />
+                    <Button
+                        title="Add"
+                        onClick={handleAddClick}
+                        isDsabled={
+                            !taskInput ||
+                            taskInput.length > MAX_SYMBOLS ||
+                            hasForbiddenWord
+                        }
+                    />
+                    <div className="input-note">
+                        {!taskInput && (
+                            <span>
+                                Max title length is {MAX_SYMBOLS} charters
+                            </span>
+                        )}
+                        {taskInput.length > MAX_SYMBOLS &&
+                            !taskInput.includes(" ") && (
+                                <span style={{ color: "red" }}>
+                                    The title length is too long
+                                </span>
+                            )}
+                        {taskInput &&
+                            taskInput.length <= MAX_SYMBOLS &&
+                            !hasForbiddenWord && (
+                                <span>
+                                    Your tiltle lenght is {taskInput.length}
+                                </span>
+                            )}
+
+                        {hasForbiddenWord && (
+                                <span style={{ color: "red" }}>
+                                    You've entered a forbidden word!
+                                </span>
+                            )}
+                    </div>
                 </div>
-                <ul>{listItems}</ul>
+
+                <ul className="list-tasks">
+                    {tasks.length === 0
+                        ? "Enter your first task"
+                        : tasks.map((t) => {
+                              return (
+                                  <Task
+                                      key={t.id}
+                                      id={t.id}
+                                      isDone={t.isDone}
+                                      title={t.title}
+                                      deleteTask={deleteTask}
+                                      changeFilter={changeFilter}
+                                  />
+                              );
+                          })}
+                </ul>
             </div>
             <div className="buttons_bottom">
                 <Button title="All" onClick={() => changeFilter("all")} />

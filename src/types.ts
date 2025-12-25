@@ -24,6 +24,11 @@ export type ButtonComponentProps = {
     title: string;
     onClick?: () => void;
     customClass?: string;
+    isDsabled?: boolean;
 };
 
 export type FilterType = "all" |  "active" | "completed"
+
+export type AddTaskFormProps = {
+    createTask: (title: string) => void;
+};
