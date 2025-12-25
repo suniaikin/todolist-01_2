@@ -20,9 +20,11 @@ export const TodolistItem = ({
     );
 
     const handleAddClick = () => {
-        createTask(taskInput);
+        createTask(taskInput.trim());
         setTaskInput("");
     };
+
+    const taskInputRequirements = taskInput && taskInput.length <= MAX_SYMBOLS;
 
     return (
         <div className="lists">
@@ -34,7 +36,9 @@ export const TodolistItem = ({
                         className="input-form"
                         onChange={(e) => setTaskInput(e.currentTarget.value)}
                         onKeyDown={(e) =>
-                            e.key === "Enter" ? handleAddClick() : ""
+                            e.key === "Enter" && taskInputRequirements
+                                ? handleAddClick()
+                                : ""
                         }
                     />
                     <Button
@@ -58,19 +62,17 @@ export const TodolistItem = ({
                                     The title length is too long
                                 </span>
                             )}
-                        {taskInput &&
-                            taskInput.length <= MAX_SYMBOLS &&
-                            !hasForbiddenWord && (
-                                <span>
-                                    Your tiltle lenght is {taskInput.length}
-                                </span>
-                            )}
+                        {taskInputRequirements && !hasForbiddenWord && (
+                            <span>
+                                Your tiltle lenght is {taskInput.length}
+                            </span>
+                        )}
 
                         {hasForbiddenWord && (
-                                <span style={{ color: "red" }}>
-                                    You've entered a forbidden word!
-                                </span>
-                            )}
+                            <span style={{ color: "red" }}>
+                                You've entered a forbidden word!
+                            </span>
+                        )}
                     </div>
                 </div>
 
