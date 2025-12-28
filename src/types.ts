@@ -8,8 +8,8 @@ export type TodolistItemProps = {
     title: string;
     tasks: TaskProps[];
     deleteTask: (taskId: TaskProps["id"]) => void;
-    changeFilter: (filter: FilterType) => void;
-    createTask: (title: string) => void;
+    createTask: (title: TaskProps["title"]) => void;
+    onChangeStatus: (taskId: TaskProps["id"], isDone: TaskProps["isDone"]) => void;
 };
 
 export type TaskComponentProps = {
@@ -17,7 +17,7 @@ export type TaskComponentProps = {
     title: string;
     isDone: boolean;
     deleteTask: (taskId: TaskProps["id"]) => void;
-    changeFilter: (filter: FilterType) => void;
+    onChangeStatus: (taskId: string, isDone: boolean) => void;
 };
 
 export type ButtonComponentProps = {
@@ -30,5 +30,5 @@ export type ButtonComponentProps = {
 export type FilterType = "all" |  "active" | "completed"
 
 export type AddTaskFormProps = {
-    createTask: (title: string) => void;
+    createTask: (title: TaskProps["title"]) => void;
 };

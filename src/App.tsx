@@ -27,6 +27,13 @@ export const App = () => {
         setTasks([...tasks, { id: v1(), title: title, isDone: false }]);
     };
 
+    const onChange = (
+        taskId: TaskProps["id"],
+        isDone: TaskProps["isDone"]
+    ) => {
+        setTasks(tasks.map((t) => (t.id === taskId ? { ...t, isDone } : t)));
+    };
+
     // UI
 
     const [filter, setFilter] = useState<FilterType>("all");
@@ -40,6 +47,7 @@ export const App = () => {
                 deleteTask={deleteTask}
                 changeFilter={changeFilter}
                 createTask={createTask}
+                onChangeStatus={onChange}
             />
         </div>
     );

@@ -12,6 +12,7 @@ export const TodolistItem = ({
     deleteTask,
     changeFilter,
     createTask,
+    onChangeStatus,
 }: TodolistItemProps) => {
     const [taskInput, setTaskInput] = useState("");
 
@@ -87,7 +88,7 @@ export const TodolistItem = ({
                                       isDone={t.isDone}
                                       title={t.title}
                                       deleteTask={deleteTask}
-                                      changeFilter={changeFilter}
+                                      onChangeStatus={onChangeStatus}
                                   />
                               );
                           })}
