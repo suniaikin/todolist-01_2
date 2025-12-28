@@ -43,7 +43,10 @@ export const TodoList = ({
                     <input
                         value={taskInput}
                         className={error ? "input-error" : "input-form"}
-                        onChange={(e) => setTaskInput(e.currentTarget.value)}
+                        onChange={(e) => {
+                            error && setError(false);
+                            setTaskInput(e.currentTarget.value);
+                        }}
                         onKeyDown={(e) =>
                             e.key === "Enter" && taskInputRequirements
                                 ? handleAddClick()
