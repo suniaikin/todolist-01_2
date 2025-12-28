@@ -1,28 +1,34 @@
-export type TaskProps = {
+export type TaskType = {
 	id: string;
 	title: string;
 	isDone: boolean
 }
 
-export type TodolistItemProps = {
+export type Props = {
     title: string;
-    tasks: TaskProps[];
-    deleteTask: (taskId: TaskProps["id"]) => void;
-    createTask: (title: TaskProps["title"]) => void;
-    onChangeStatus: (taskId: TaskProps["id"], isDone: TaskProps["isDone"]) => void;
+    tasks: TaskType[];
+    deleteTask: (taskId: TaskType["id"]) => void;
+    createTask: (title: TaskType["title"]) => void;
+    changeFilter: (filter: FilterType) => void;
+    onChangeStatus: (
+        taskId: TaskType["id"],
+        isDone: TaskType["isDone"]
+    ) => void;
+    filter: FilterType
 };
 
 export type TaskComponentProps = {
     id: string;
     title: string;
     isDone: boolean;
-    deleteTask: (taskId: TaskProps["id"]) => void;
+    deleteTask: (taskId: TaskType["id"]) => void;
     onChangeStatus: (taskId: string, isDone: boolean) => void;
+    className: string;
 };
 
 export type ButtonComponentProps = {
     title: string;
-    onClick?: () => void;
+    onClickHandler?: () => void;
     customClass?: string;
     isDsabled?: boolean;
 };
@@ -30,5 +36,5 @@ export type ButtonComponentProps = {
 export type FilterType = "all" |  "active" | "completed"
 
 export type AddTaskFormProps = {
-    createTask: (title: TaskProps["title"]) => void;
+    createTask: (title: TaskType["title"]) => void;
 };

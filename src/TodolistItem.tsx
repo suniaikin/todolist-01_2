@@ -1,4 +1,4 @@
-import type { TodolistItemProps } from "./types";
+import type { Props } from "./types";
 import { Task } from "./Task";
 import { Button } from "./Button";
 import { useState } from "react";
@@ -6,14 +6,15 @@ import { useState } from "react";
 const MAX_SYMBOLS = 10;
 const forbiddenWords = ["shit", "fuck"];
 
-export const TodolistItem = ({
+export const TodoList = ({
     title,
     tasks,
+    filter,
     deleteTask,
     changeFilter,
     createTask,
     onChangeStatus,
-}: TodolistItemProps) => {
+}: Props) => {
     const [taskInput, setTaskInput] = useState("");
 
     let hasForbiddenWord = forbiddenWords.some((word) =>
@@ -44,7 +45,7 @@ export const TodolistItem = ({
                     />
                     <Button
                         title="Add"
-                        onClick={handleAddClick}
+                        onClickHandler={handleAddClick}
                         isDsabled={
                             !taskInput ||
                             taskInput.length > MAX_SYMBOLS ||
@@ -76,6 +77,7 @@ export const TodolistItem = ({
                         )}
                     </div>
                 </div>
+                <span>{filter}</span>
 
                 <ul className="list-tasks">
                     {tasks.length === 0
@@ -89,17 +91,33 @@ export const TodolistItem = ({
                                       title={t.title}
                                       deleteTask={deleteTask}
                                       onChangeStatus={onChangeStatus}
+                                      className={
+                                          t.isDone ? "task-done" : "task"
+                                      }
                                   />
                               );
                           })}
                 </ul>
             </div>
             <div className="buttons_bottom">
-                <Button title="All" onClick={() => changeFilter("all")} />
-                <Button title="Active" onClick={() => changeFilter("active")} />
+                <Button
+                    title="All"
+                    onClickHandler={() => changeFilter("all")}
+                    customClass={filter === "all" ? "filter-btn-active" : "btn"}
+                />
+                <Button
+                    title="Active"
+                    onClickHandler={() => changeFilter("active")}
+                    customClass={
+                        filter === "active" ? "filter-btn-active" : "btn"
+                    }
+                />
                 <Button
                     title="Completed"
-                    onClick={() => changeFilter("completed")}
+                    onClickHandler={() => changeFilter("completed")}
+                    customClass={
+                        filter === "completed" ? "filter-btn-active" : "btn"
+                    }
                 />
             </div>
         </div>

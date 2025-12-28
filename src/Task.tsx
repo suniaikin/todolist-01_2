@@ -8,6 +8,7 @@ export const Task = ({
     isDone,
     deleteTask,
     onChangeStatus,
+    className,
 }: TaskComponentProps) => {
     return (
         <li key={id} className="list-row">
@@ -21,7 +22,7 @@ export const Task = ({
                 checked={isDone}
                 onChange={(e) => onChangeStatus(id, e.target.checked)}
             />
-            <span>{title}</span>
+            <span className={className}>{title}</span>
         </li>
     );
 };
