@@ -102,8 +102,10 @@ h3 {
 }
 
 .input-error {
-    border: 3px solid rgb(117, 0, 0);
-    background-color: red;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr auto;
+    border: 2px solid rgb(117, 0, 0);
 }
 
 .add-button {

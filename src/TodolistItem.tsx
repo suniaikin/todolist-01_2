@@ -16,13 +16,20 @@ export const TodoList = ({
     onChangeStatus,
 }: Props) => {
     const [taskInput, setTaskInput] = useState("");
+    const [error, setError] = useState(false);
 
     let hasForbiddenWord = forbiddenWords.some((word) =>
         taskInput.toLowerCase().includes(word)
     );
 
     const handleAddClick = () => {
-        createTask(taskInput.trim());
+        const trimmedTitle = taskInput.trim();
+        if (trimmedTitle) {
+            createTask(trimmedTitle);
+        } else {
+            setError(true);
+        }
+
         setTaskInput("");
     };
 
@@ -35,7 +42,7 @@ export const TodoList = ({
                 <div className="input-form">
                     <input
                         value={taskInput}
-                        className="input-form"
+                        className={error ? "input-error" : "input-form"}
                         onChange={(e) => setTaskInput(e.currentTarget.value)}
                         onKeyDown={(e) =>
                             e.key === "Enter" && taskInputRequirements
@@ -53,7 +60,7 @@ export const TodoList = ({
                         }
                     />
                     <div className="input-note">
-                        {!taskInput && (
+                        {!error && !taskInput && (
                             <span>
                                 Max title length is {MAX_SYMBOLS} charters
                             </span>
@@ -73,6 +80,12 @@ export const TodoList = ({
                         {hasForbiddenWord && (
                             <span style={{ color: "red" }}>
                                 You've entered a forbidden word!
+                            </span>
+                        )}
+
+                        {error && (
+                            <span style={{ color: "red" }}>
+                                Please enter a valid title
                             </span>
                         )}
                     </div>

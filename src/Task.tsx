@@ -15,7 +15,7 @@ export const Task = ({
             <Button
                 customClass="btn-delete"
                 title="x"
-                onClick={() => deleteTask(id)}
+                onClickHandler={() => deleteTask(id)}
             />
             <input
                 type="checkbox"
