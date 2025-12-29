@@ -30,7 +30,8 @@ export type ButtonComponentProps = {
     title: string;
     onClickHandler?: () => void;
     customClass?: string;
-    isDsabled?: boolean;
+    isDisabled?: boolean;
+    className?: string;
 };
 
 export type FilterType = "all" |  "active" | "completed"

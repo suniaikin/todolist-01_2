@@ -8,10 +8,10 @@ export const Task = ({
     isDone,
     deleteTask,
     onChangeStatus,
-    className,
+    className
 }: TaskComponentProps) => {
     return (
-        <li key={id} className="list-row">
+        <li className="list-row">
             <Button
                 customClass="btn-delete"
                 title="x"

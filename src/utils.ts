@@ -1,7 +1,7 @@
-import type { TaskProps, FilterType } from "./types";
+import type { TaskType, FilterType } from "./types";
 
 
-export const getFilteredTasks = (tasks: TaskProps[], filter: FilterType) => {
+export const getFilteredTasks = (tasks: TaskType[], filter: FilterType) => {
     switch (filter) {
         case "active":
             return tasks.filter((t) => !t.isDone);

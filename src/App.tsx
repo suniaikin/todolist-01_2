@@ -4,7 +4,7 @@ import { TodoList } from "./TodolistItem.tsx";
 import type { TaskType } from "./types";
 import { useState } from "react";
 import type { FilterType } from "./types";
-import { getFilteredTasks } from "./utilits.ts";
+import { getFilteredTasks } from "./utils.ts";
 
 const title_1 = "What to learn";
 

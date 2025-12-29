@@ -47,16 +47,20 @@ export const TodoList = ({
                             error && setError(false);
                             setTaskInput(e.currentTarget.value);
                         }}
-                        onKeyDown={(e) =>
-                            e.key === "Enter" && taskInputRequirements
-                                ? handleAddClick()
-                                : ""
-                        }
+                        onKeyDown={(e) => {
+                            if (
+                                e.key === "Enter" &&
+                                taskInputRequirements &&
+                                !hasForbiddenWord
+                            ) {
+                                handleAddClick();
+                            }
+                        }}
                     />
                     <Button
                         title="Add"
                         onClickHandler={handleAddClick}
-                        isDsabled={
+                        isDisabled={
                             !taskInput ||
                             taskInput.length > MAX_SYMBOLS ||
                             hasForbiddenWord
@@ -65,19 +69,16 @@ export const TodoList = ({
                     <div className="input-note">
                         {!error && !taskInput && (
                             <span>
-                                Max title length is {MAX_SYMBOLS} charters
+                                Max title length is {MAX_SYMBOLS} characters
                             </span>
                         )}
-                        {taskInput.length > MAX_SYMBOLS &&
-                            !taskInput.includes(" ") && (
-                                <span style={{ color: "red" }}>
-                                    The title length is too long
-                                </span>
-                            )}
-                        {taskInputRequirements && !hasForbiddenWord && (
-                            <span>
-                                Your tiltle lenght is {taskInput.length}
+                        {taskInput.length > MAX_SYMBOLS && (
+                            <span style={{ color: "red" }}>
+                                The title length is too long
                             </span>
+                        )}
+                        {taskInputRequirements && !hasForbiddenWord && (
+                            <span>Your title length is {taskInput.length}</span>
                         )}
 
                         {hasForbiddenWord && (

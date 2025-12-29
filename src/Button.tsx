@@ -4,13 +4,13 @@ export const Button = ({
     title,
     onClickHandler,
     customClass,
-    isDsabled,
+    isDisabled,
 }: ButtonComponentProps) => {
     return (
         <button
             onClick={onClickHandler}
             className={customClass}
-            disabled={isDsabled}
+            disabled={isDisabled}
         >
             {title}
         </button>
