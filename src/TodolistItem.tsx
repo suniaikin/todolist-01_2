@@ -2,6 +2,7 @@ import type { Props } from "./types";
 import { Task } from "./Task";
 import { Button } from "./Button";
 import { useState } from "react";
+import { filterName } from "./utils";
 
 const MAX_SYMBOLS = 10;
 const forbiddenWords = ["shit", "fuck"];
@@ -94,7 +95,7 @@ export const TodoList = ({
                         )}
                     </div>
                 </div>
-                <span>{filter}</span>
+                <span className="filter-name">{filterName(filter)}</span>
 
                 <ul className="list-tasks">
                     {tasks.length === 0

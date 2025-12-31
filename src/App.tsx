@@ -8,9 +8,12 @@ import { getFilteredTasks } from "./utils.ts";
 
 const title_1 = "What to learn";
 
+
+
 export const App = () => {
     // BLL
 
+    
     const [tasks, setTasks] = useState<TaskType[]>([
         { id: v1(), title: "JS", isDone: false },
         { id: v1(), title: "React", isDone: false },

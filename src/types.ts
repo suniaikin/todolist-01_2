@@ -39,3 +39,9 @@ export type FilterType = "all" |  "active" | "completed"
 export type AddTaskFormProps = {
     createTask: (title: TaskType["title"]) => void;
 };
+
+export type TodilistType = {
+    id: string;
+    titile: string;
+    filter: FilterType;
+};
